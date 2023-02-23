@@ -37,26 +37,38 @@ class Mascota:
 
 class sistemaV:
     def __init__(self):
-        self.__lista_mascotas = []
-        # self.__lista_mascotas = {}
+        self.__lista_felino = {}
+        self.__lista_canino = {}
 
     def verificarExiste(self,historia):
-        for m in self.__lista_mascotas:
-            if historia == m.verHistoria():
-                return True
+        if historia in self.__lista_felino and historia in self.__lista_canino:
+            return True
         #solo luego de haber recorrido todo el ciclo se retorna False
         return False
 
     def verNumeroMascotas(self):
-        return len(self.__lista_mascotas) 
+        m = input("Desea ver la cantidad de felinos o caninos?: ")
+        if m == "felinos":
+            return len(self.__lista_felino)
+        elif m == "caninos":
+            return len(self.__lista_canino) 
 
     def ingresarMascota(self,mascota):
-        self.__lista_mascotas.append(mascota) 
-        # self.__lista_mascotas[mascota.verHistoria()]=mascota
+        if mascota.verTipo() == "felino":
+            if len(self.__lista_felino)<7:
+                self.__lista_felino[mascota.verHistoria()]=mascota
+            else:
+                print("No puedes ingresar mas felinos, ya hay 7")
+
+        elif mascota.verTipo() == "canino":
+            if len(self.__lista_canino)<7:
+                self.__lista_canino[mascota.verHistoria()]=mascota
+            else:
+                print("No puedes ingresar mas caninos, ya hay 7")
 
     def verFechaIngreso(self,historia):
         #busco la mascota y devuelvo el atributo solicitado
-        for masc in self.__lista_mascotas:
+        for masc in self.__lista_felino and masc in self.__lista_canino:
             if historia == masc.verHistoria():
                 return masc.verFecha() 
         return None
@@ -78,17 +90,17 @@ class sistemaV:
 
 
 class Medicamento:
-    def __init__(self):
-        self.__nombre = "" 
-        self.__dosis = 0 
-    
-    def verNombre(self):
-        return self.__nombre 
-    def verDosis(self):
-        return self.__dosis 
-    
-    def asignarNombre(self,med):
-        self.__nombre = med 
-    def asignarDosis(self,med):
-        self.__dosis = med 
-        
+
+            def __init__(self):
+                self.__nombre = "" 
+                self.__dosis = 0 
+            
+            def verNombre(self):
+                return self.__nombre 
+            def verDosis(self):
+                return self.__dosis 
+            
+            def asignarNombre(self,med):
+                self.__nombre = med 
+            def asignarDosis(self,med):
+                self.__dosis = med 
